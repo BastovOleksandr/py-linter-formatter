@@ -11,13 +11,10 @@ def format_linter_error(error: dict) -> dict:
 def format_single_linter_file(file_path: str, errors: list) -> dict:
     return {
         "errors": [
-            format_linter_error(error)
-            for error in errors
+            format_linter_error(error) for error in errors
         ],
         "path": file_path,
-        "status":
-            "failed" if len(errors)
-            else "passed"
+        "status": "failed" if len(errors) else "passed"
     }
 
 
@@ -26,3 +23,7 @@ def format_linter_report(linter_report: dict) -> list:
         format_single_linter_file(file_path, errors)
         for file_path, errors in linter_report.items()
     ]
+
+
+def get_average_mark(name: str, *args) -> str:
+    return f"{name} got {sum(args) // len(args)}"
